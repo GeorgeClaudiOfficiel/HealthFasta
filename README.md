@@ -85,8 +85,8 @@ The `healthfasta` database consists of three main tables:
 
 For more detailed information, refer to:
 
-- [Database Schema](DATABASE.md)
-- [Entity-Relationship Diagram](./docs/ERDiagram.png)
+- [Database Schema](./database/DATABASE.md)
+- [Entity-Relationship Diagram](./database/docs/ER_DIAGRAM.png)
 - [SQL Script](./database/schema.sql)
 
 ## **Setup Instructions**
