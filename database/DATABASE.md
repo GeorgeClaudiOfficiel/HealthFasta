@@ -54,7 +54,7 @@ The `data/` folder contains sample data files used to populate the `healthfasta`
 ### How to Use
 
 1. Import the CSV files into the `healthfasta` database using MySQL Workbench or a command-line tool.
-2. Ensure the database tables are created first by running the SQL schema script (`schema.sql`).
+2. Ensure the database tables are created first by running the SQL schema script (`HealthFasta_SQL_script.sql`).
 3. Load the data in the following order:
     - `Patients.csv` (First table to populate)
     - `PhysiologicalData.csv`
