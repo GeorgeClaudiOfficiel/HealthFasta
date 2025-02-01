@@ -66,7 +66,7 @@ class PhysiologicalDataModel:
     @staticmethod
     def read_all():
         query = "SELECT * FROM physiologicaldata"
-        cursor = mysql.connection.cursor()
+        cursor = mysql.connection.cursor(DictCursor)
         cursor.execute(query)
         results = cursor.fetchall()
         cursor.close()
@@ -119,7 +119,7 @@ class DiagnosisModel:
     @staticmethod
     def read_all():
         query = "SELECT * FROM diagnosis"
-        cursor = mysql.connection.cursor()
+        cursor = mysql.connection.cursor(DictCursor)
         cursor.execute(query)
         results = cursor.fetchall()
         cursor.close()
