@@ -9,9 +9,10 @@ from config import Config  # Add this to your `config.py`
 routes = Blueprint("routes", __name__)
 
 # Helper function for token generation
-def generate_token(user_id):
+def generate_token(user_id, username):
     payload = {
         "user_id": user_id,
+        "username": username, # Include the username in the token
         "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=1)  # Token valid for 1 hour
     }
     token = jwt.encode(payload, Config.SECRET_KEY, algorithm="HS256")
@@ -40,7 +41,7 @@ def login():
     if user:
         if user["Password"] == password:
             print("Password matched")  # Print the result of password hash comparison
-            token = generate_token(user["UserID"])
+            token = generate_token(user["UserID"], user["Username"])
             return jsonify({"message": "Login successful", "token": token}), 200
     print("Invalid credentials")
     return jsonify({"error": "Invalid username or password"}), 401
