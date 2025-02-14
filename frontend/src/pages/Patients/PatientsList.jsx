@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Table, TableBody, TableCell, TableHead, TableRow, Button, Box, Typography } from '@mui/material';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -9,6 +9,7 @@ import Loader from '../../components/Loader'; // Correct import path for Loader
 const PatientsList = () => {
   const [patients, setPatients] = useState([]);
   const navigate = useNavigate();
+  const location = useLocation();
   const [loading, setLoading] = useState(true); // Add a loading state
   const fetchPatients = async () => {
     try {
@@ -35,7 +36,10 @@ const PatientsList = () => {
 
   useEffect(() => {
     fetchPatients();
-  }, []);
+    if (location.state?.PatientId) {
+      toast.success(`New patient added with ID: ${location.state.PatientId}`);
+    }
+  }, [location.state]);
 
   // If loading is true, display the Loader component
   if (loading) {
