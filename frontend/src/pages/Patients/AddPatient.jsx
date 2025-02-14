@@ -15,8 +15,9 @@ const AddPatient = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await api.post('/patients', patient);
-      navigate('/patients');
+      const response = await api.post('/patients', patient); // Assuming backend returns created patient
+      const newPatient = response.data; // Get the created patient data including PatientID
+      navigate('/patients', { state: { PatientId: newPatient.PatientId } }); // Pass PatientID in navigation state
     } catch (error) {
       console.error('Error adding patient:', error);
     }
