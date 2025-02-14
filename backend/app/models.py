@@ -24,7 +24,7 @@ class PatientModel:
     @staticmethod
     def read_one(patient_id):
         query = "SELECT * FROM patient WHERE PatientID = %s"
-        cursor = mysql.connection.cursor()
+        cursor = mysql.connection.cursor(DictCursor)
         cursor.execute(query, (patient_id,))
         result = cursor.fetchone()
         cursor.close()
@@ -212,3 +212,36 @@ class UsersModel:
         mysql.connection.commit()
         cursor.close()
         return True
+
+
+class DiseaseSymptomsModel:
+    @staticmethod
+    def find_diseases_by_symptoms(symptoms):
+        """
+        Find diseases that match the given symptoms.
+        """
+        query = """
+            SELECT Name, Symptoms 
+            FROM disease_symptoms 
+            WHERE Symptoms LIKE %s
+        """
+        cursor = mysql.connection.cursor(DictCursor)
+        matching_diseases = []
+
+        # Search for diseases that match any of the selected symptoms
+        for symptom in symptoms:
+            cursor.execute(query, (f"%{symptom}%",))
+            results = cursor.fetchall()
+            matching_diseases.extend(results)
+
+        cursor.close()
+
+        # Remove duplicates (if any)
+        unique_diseases = []
+        seen = set()
+        for disease in matching_diseases:
+            if disease["Name"] not in seen:
+                seen.add(disease["Name"])
+                unique_diseases.append(disease)
+
+        return unique_diseases
