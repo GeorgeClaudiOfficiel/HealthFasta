@@ -2,8 +2,10 @@ from flask import Blueprint, request, jsonify
 # from werkzeug.security import check_password_hash
 import jwt
 import datetime
-from app.models import PatientModel, PhysiologicalDataModel, DiagnosisModel, UsersModel
+from app.models import PatientModel, PhysiologicalDataModel, DiagnosisModel, UsersModel, DiseaseSymptomsModel
 from config import Config  # Add this to your `config.py`
+from MySQLdb.cursors import DictCursor
+from app import mysql
 
 
 routes = Blueprint("routes", __name__)
@@ -175,3 +177,39 @@ def update_user(user_id):
 def delete_user(user_id):
     UsersModel.delete(user_id)
     return jsonify({"message": "User deleted successfully"}), 200
+
+# Endpoint for disease prediction
+@routes.route("/predict-disease", methods=["POST"])
+def predict_disease():
+    data = request.json
+    symptoms = data.get("symptoms")  # List of symptoms selected by the user
+
+    if not symptoms:
+        return jsonify({"error": "No symptoms provided"}), 400
+
+    # Query the database to find matching diseases
+    matching_diseases = DiseaseSymptomsModel.find_diseases_by_symptoms(symptoms)
+
+    if not matching_diseases:
+        return jsonify({"error": "No matching diseases found"}), 404
+
+    # Return the list of matching diseases
+    return jsonify({"diseases": matching_diseases}), 200
+
+# Endpoint to get symptoms
+@routes.route("/symptoms", methods=["GET"])
+def get_symptoms():
+    query = "SELECT DISTINCT Symptoms FROM disease_symptoms"
+    cursor = mysql.connection.cursor(DictCursor)
+    cursor.execute(query)
+    results = cursor.fetchall()
+    cursor.close()
+
+    # Extract and format symptoms
+    symptoms = []
+    for row in results:
+        symptoms.extend(row["Symptoms"].split(", "))
+
+    # Remove duplicates
+    unique_symptoms = list(set(symptoms))
+    return jsonify(unique_symptoms), 200
