@@ -32,7 +32,7 @@ const ReportsList = () => {
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" gutterBottom>Health Reports</Typography>
       <Button variant="contained" color="primary" onClick={() => navigate('/reports/add')} sx={{ mb: 2 }}>
-        Add/Edit Health Report
+        Add Health Report
       </Button>
       <Table>
         <TableHead>
