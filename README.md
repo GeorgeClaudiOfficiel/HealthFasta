@@ -2,7 +2,7 @@
 
 ## **Overview**
 
-This project focuses on the collection, digitization, and management of health records for improved health data accessibility and organization. The system targets three regions in Kenya (Kiambu, Nyahururu, Nyeri) and aims to collect demographic, physiological, and diagnosis data from a population of 150 patients. The project serves as part of the requirements for a Bachelor's degree in Computer and Electronics Systems.
+This project focuses on the collection, digitization, and management of health records for improved health data accessibility and organization. The system targets three regions in Kenya (Kiambu, Nyahururu, Nyeri) and aims to collect demographic, physiological, and diagnosis data from a population of 210 patients. The project serves as part of the requirements for a Bachelor's degree in Computer and Electronics Systems.
 
 ## **Objectives**
 
@@ -17,16 +17,16 @@ This project focuses on the collection, digitization, and management of health r
    - Validate inputs to ensure data quality.
 
 2. **Data Storage:**
-   - Store patient information securely in a relational database.
+   - Store patient information securely in a relational database (MySQL).
    - Support efficient queries and updates.
 
 3. **Data Analytics:**
-   - Generate statistics such as average temperature and common diagnoses.
+   - Generate statistics such as Population distribution based on Gender.
    - Provide region-specific insights.
 
 4. **Reporting:**
    - Export data as CSV/Excel.
-   - Generate printable PDF summaries for clinics.
+   - A grouped bar chart.
 
 ## **System Architecture**
 
@@ -38,10 +38,10 @@ The system consists of:
 
 ## **Tech Stack**
 
-- **Frontend:** React.js (or Vue.js/Angular), HTML, CSS, Bootstrap/Tailwind CSS.
-- **Backend:** Python (Django/Flask) or Node.js (Express.js).
-- **Database:** PostgreSQL or MySQL.
-- **Deployment:** Hosted on cloud platforms like AWS, Heroku, or Vercel.
+- **Frontend:** React.js and MUI.
+- **Backend:** Python (Flask).
+- **Database:** MySQL.
+- **Deployment:** Hosted on cloud platforms like AWS, Heroku, or Vercel (NOT YET).
 
 ## **Project Structure**
 
@@ -49,7 +49,7 @@ The system consists of:
 │
 ├── frontend/              # Frontend files
 │   ├── public/            # Static files
-│   ├── src/               # React/Angular/Vue source code
+│   ├── src/               # React source code
 │   ├── package.json       # Frontend dependencies
 │   └── README.md          # Frontend-specific documentation
 │
@@ -60,8 +60,8 @@ The system consists of:
 │   └── README.md          # Backend-specific documentation
 │
 ├── database/              # SQL scripts and database schema
-│   ├── schema.sql         # Database schema
-│   ├── seeds.sql          # Dummy data (optional)
+│   ├── data               # Database schema
+│   ├── docs               # Dummy data (optional)
 │   └── README.md          # Database-specific documentation
 │
 ├── docs/                  # Project documentation
@@ -87,7 +87,7 @@ For more detailed information, refer to:
 
 - [Database Schema](./database/DATABASE.md)
 - [Entity-Relationship Diagram](./database/docs/ER_DIAGRAM.png)
-- [SQL Script](./database/schema.sql)
+- [SQL Script](./database/HealFasta_SQL_script.sql)
 
 ## **Setup Instructions**
 
@@ -95,7 +95,7 @@ For more detailed information, refer to:
 
 - Node.js (for frontend)
 - Python 3.9+ (for backend)
-- PostgreSQL/MySQL (for database)
+- MySQL (for database)
 - Git (for version control)
 
 ### Steps
