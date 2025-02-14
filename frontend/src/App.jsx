@@ -7,6 +7,7 @@ import AddPatient from './pages/Patients/AddPatient';
 import EditPatient from './pages/Patients/EditPatient';
 import ReportsList from './pages/Reports/ReportsList';
 import AddReport from './pages/Reports/AddReport';
+import DiagnosisList from './pages/Diagnosis/DiagnosisList';
 import Settings from './pages/Settings';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/patients/edit/:id" element={<EditPatient />} />
           <Route path="/reports" element={<ReportsList />} />
           <Route path="/reports/add" element={<AddReport />} />
+          <Route path="/diagnoses" element={<DiagnosisList />} />
           <Route path="/settings" element={<Settings />} />
         </Route>
       </Routes>
