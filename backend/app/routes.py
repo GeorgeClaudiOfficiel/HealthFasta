@@ -41,9 +41,9 @@ def login():
     user = UsersModel.read_by_username(username)
     print("Queried user:", user)  # Print user object from the database
     if user:
-        if user["Password"] == password:
+        if user["password"] == password:
             print("Password matched")  # Print the result of password hash comparison
-            token = generate_token(user["UserID"], user["Username"])
+            token = generate_token(user["id"], user["username"])
             return jsonify({"message": "Login successful", "token": token}), 200
     print("Invalid credentials")
     return jsonify({"error": "Invalid username or password"}), 401
